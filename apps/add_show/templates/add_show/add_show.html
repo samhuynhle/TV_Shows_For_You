@@ -1,0 +1,54 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Checkout example for Bootstrap</title>
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </head>
+
+<body class="bg-light">
+    <div class="container">
+            <a href="/shows" class="btn btn-lg btn-secondary">Go Back</a>
+        <div class="py-5 text-center">
+            <h2>Add New Show</h2>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <form action="/add_process" method="POST">
+                {% csrf_token %}
+                    <div class="col-md-6 mb-3">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" name="title" placeholder="Title of Show" required="">
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="network">Network: </label>
+                        <input type="text" class="form-control" name="network" placeholder="Host Network" value="Blank" required="">
+
+                        <label for="release_date">Release Date: </label>
+                        <input class="form-control" type="date" name="release_date" required="">
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="description">Description</label>
+                        <input type="text" class="form-control" name="description" placeholder="Description of Show" required="">
+                    </div>
+
+                    <hr class="mb-4">
+
+                    <div class="col-md-6 mb-3 text-center">
+                        <button class="btn btn-primary btn-med btn-block" type="submit">Add Show</button>
+                    </div>
+                </form>
+            </div>  
+        </div>
+    </div>
+    </body>
+</html>

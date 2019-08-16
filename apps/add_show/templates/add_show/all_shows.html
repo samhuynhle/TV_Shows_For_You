@@ -1,0 +1,36 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Checkout example for Bootstrap</title>
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </head>
+
+    <body>
+        <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Network</th>
+            <th scope="col">Release Date</th>
+            <th scope="col"></th>
+            <th scope="col">Action</th>
+            <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for a in request.session.for_print %}
+                {{a | safe}}
+            {% endfor %}
+        </tbody>
+        </table>
+
+        <a href="shows/new"> Add A New Show </a>
+    </body>
