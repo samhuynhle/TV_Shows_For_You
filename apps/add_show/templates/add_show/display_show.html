@@ -15,20 +15,26 @@
 
   </head>
 
-  <body class="text-center">
-    <a href="/shows" class="btn btn-lg btn-secondary">Go Back</a>
+<body class="text-center">
+
+    <nav class="navbar navbar-dark bg-secondary">
+    </nav>
+
+    <div class="text-right mr-5">
+        <a href="/shows" class="btn btn-med btn-secondary mt-3">Go Back</a>
+    </div>
+
 
     <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
-
       <main role="main" class="inner cover">
-        <h1 class="cover-heading">TV Show Number {{ show_id }}</h1>
-        <p class="lead">Title: {{ show_title }}</p>
-        <p class="lead">Network: {{ show_network }}</p>
-        <p class="lead">Release Date: {{ show_release_date }}</p>
-        <p class="lead">Description: {{ show_description }}</p>
+        <h1 class="cover-heading">TV Show Number {{ show.id }}</h1>
+        <p class="lead">Title: {{ show.title }}</p>
+        <p class="lead">Network: {{ show.network }}</p>
+        <p class="lead">Release Date: {{ show.release_date }}</p>
+        <p class="lead">Description: {{ show.description }}</p>
         <p class="lead">
-          <a href="/shows/{{show_id}}/edit" class="btn btn-lg btn-secondary">Edit</a>
-          <a href="/shows/{{show_id}}/delete" class="btn btn-lg btn-secondary">Delete</a>
+          <a href="/shows/{{show.id}}/edit" class="btn btn-med btn-secondary">Edit</a>
+          <a href="/shows/{{show.id}}/delete" class="btn btn-med btn-secondary">Delete</a>
         </p>
       </main>
 

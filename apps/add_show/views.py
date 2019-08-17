@@ -7,14 +7,8 @@ def add(request):
     return render(request,'add_show/add_show.html')
 
 def display_show(request,show_id):
-    current_show = Show.objects.get(id=show_id)
-
     context = {
-        'show_id': current_show.id,
-        'show_title': current_show.title,
-        'show_release_date': current_show.release_date,
-        'show_network': current_show.network,
-        'show_description': current_show.description,
+        'show' : Show.objects.get(id=show_id),
     }
 
     return render(request,'add_show/display_show.html', context)
@@ -32,11 +26,8 @@ def edit_show(request,show_id):
     date = current_show.release_date
 
     context = {
-        'show_id': current_show.id,
-        'show_title': current_show.title,
+        'show': current_show,
         'show_release_date': str(date),
-        'show_network': current_show.network,
-        'show_description': current_show.description,
     }
 
     return render(request,'add_show/edit_show.html', context)
@@ -76,9 +67,9 @@ def create_table_for_home(request):
     shows = Show.objects.all()
 
     for x in range(0,len(shows),1):
-        show_url = f"<a href='/shows/{shows[x].id}'>Show</a>"
-        edit_url = f"<a href='/shows/{shows[x].id}/edit'>edit</a>"
-        delete_url = f"<a href='/shows/{shows[x].id}/delete'>delete</a>"
+        show_url = f"<a href='/shows/{shows[x].id}' class='btn btn-sm btn-info'>Show</a>"
+        edit_url = f"<a href='/shows/{shows[x].id}/edit' class='btn btn-sm btn-info'>Edit</a>"
+        delete_url = f"<a href='/shows/{shows[x].id}/delete' class='btn btn-sm btn-info'>Delete</a>"
         request.session['for_print'].append(f"<tr><th scope='col'>{shows[x].id}</th><th scope='col'>{shows[x].title}</th><th scope='col'>{shows[x].network}</th><th scope='col'>{shows[x].release_date}</th><th scope='col'>{show_url}</th><th scope='col'>{edit_url}</th><th scope='col'>{delete_url}</th></tr>")
 
     return redirect('/shows')

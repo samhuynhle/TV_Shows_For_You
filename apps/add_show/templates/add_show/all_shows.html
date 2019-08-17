@@ -13,24 +13,35 @@
     </head>
 
     <body>
-        <table class="table">
-        <thead>
-            <tr>
-            <th scope="col">#</th>
-            <th scope="col">Title</th>
-            <th scope="col">Network</th>
-            <th scope="col">Release Date</th>
-            <th scope="col"></th>
-            <th scope="col">Action</th>
-            <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for a in request.session.for_print %}
-                {{a | safe}}
-            {% endfor %}
-        </tbody>
-        </table>
 
-        <a href="shows/new"> Add A New Show </a>
+    <nav class="navbar navbar-dark bg-secondary">
+    </nav>
+
+    <div class="container mt-5">
+        <div class="col"></div>
+        <div class="col">
+            <table class="table">
+            <thead>
+                <tr class="text-info">
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Network</th>
+                <th scope="col">Release Date</th>
+                <th scope="col"></th>
+                <th scope="col">Action</th>
+                <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in request.session.for_print %}
+                    {{a | safe}}
+                {% endfor %}
+            </tbody>
+            </table>
+        </div>  
+        <div class="col">
+            <a href="shows/new" class="btn btn-primary"> Add A New Show </a>
+        </div>
+    </div>
+
     </body>
