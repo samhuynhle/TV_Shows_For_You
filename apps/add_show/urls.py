@@ -3,7 +3,7 @@ from django.contrib import admin
 from . import views
 
 urlpatterns = [
-    url(r'^shows/new$',views.add),
+    url(r'^shows/new$',views.add_show),
     url(r'^shows$',views.all_shows),
     url(r'^shows/(?P<show_id>[0-9]+)/edit$',views.edit_show),
     url(r'^shows/(?P<show_id>[0-9]+)/delete$',views.delete_show),

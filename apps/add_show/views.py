@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from .models import *
 from datetime import *
 
 # Create your views here.
-def add(request):
+def add_show(request):
     return render(request,'add_show/add_show.html')
 
 def display_show(request,show_id):
@@ -27,6 +28,7 @@ def edit_show(request,show_id):
 
     context = {
         'show': current_show,
+        'show_description': current_show.description,
         'show_release_date': str(date),
     }
 
@@ -35,22 +37,38 @@ def edit_show(request,show_id):
 def edit_process(request):
     if request.method=="POST":
         current_show = Show.objects.get(id=request.session['show_id'])
+        errors = Show.objects.basic_validator(request.POST)
 
-        current_show.title = request.POST['title']
-        current_show.network = request.POST['network']
-        current_show.release_date = request.POST['release_date']
-        current_show.description = request.POST['description']
-        current_show.save()
-    return redirect('/shows')
+        if len(errors) > 0:
+            for key, value in errors.items():
+                messages.error(request,value)
+            return redirect(f"/shows/{current_show.id}/edit")
+
+        else:
+            current_show.title = request.POST['title']
+            current_show.network = request.POST['network']
+            current_show.release_date = request.POST['release_date']
+            current_show.description = request.POST['description']
+            
+            current_show.save()
+
+    return redirect(f"/shows/{current_show.id}/")
 
 def add_process(request):
     if request.method=="POST":
-        date = request.POST['release_date']
-        date = datetime.strptime(date, '%Y-%m-%d')
-        new_entry = Show.objects.create(title=request.POST['title'], network=request.POST['network'], release_date=request.POST['release_date'], description=request.POST['description'])
-        new_entry.save()
+        errors = Show.objects.basic_validator(request.POST)
 
-    return redirect('/shows')
+        if len(errors) > 0:
+
+            for key, value in errors.items():
+                messages.error(request,value)
+            return redirect('/shows/new')
+        
+        else:
+            new_entry = Show.objects.create(title=request.POST['title'], network=request.POST['network'], release_date=request.POST['release_date'], description=request.POST['description'])
+            new_entry.save()
+
+    return redirect(f"shows/{new_entry.id}")
 
 def delete_show(request,show_id):
     current_show = Show.objects.get(id=show_id)
